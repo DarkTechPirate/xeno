@@ -1,0 +1,11 @@
+order_id,order_date,customer_name,email,phone,country,product_name,quantity,unit_price,total_amount,payment_mode,transaction_ref
+ORD001,31/02/2025,John Smith,john@example.com,9876543210,IN,Laptop,1,1000.00,1000.00,credit_card,TXN001
+ORD002,2025-13-15,Jane Doe,jane@example.com,9876543211,SG,Mouse,2,50.00,100.00,debit_card,TXN002
+ORD003,2025/32/01,Bob Johnson,bob@example.com,2125551234,US,Keyboard,3,75.00,225.00,net_banking,TXN003
+ORD004,99-12-25,Alice Brown,alice@example.com,02012345678,UK,Monitor,1,300.00,300.00,credit_card,TXN004
+ORD005,15-01-2025,Charlie Davis,charlie@example.com,9876543212,IN,USB Cable,5,10.00,50.00,upi,TXN005
+ORD006,,Diana Wilson,diana@example.com,9876543213,IN,HDMI Cable,2,15.00,30.00,credit_card,TXN006
+ORD007,2025/01/35,Edward Miller,edward@example.com,2125551235,US,Webcam,1,120.00,120.00,debit_card,TXN007
+ORD008,invalid_date,Fiona Taylor,fiona@example.com,9876543214,SG,Speaker,1,80.00,80.00,net_banking,TXN008
+ORD009,2025-00-01,George Anderson,george@example.com,9876543215,IN,Headphones,1,150.00,150.00,credit_card,TXN009
+ORD010,25/12/1899,Hannah Lee,hannah@example.com,02012345679,UK,Desk Lamp,2,45.00,90.00,upi,TXN010

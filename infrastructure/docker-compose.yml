@@ -1,0 +1,114 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: transactiq-db
+    environment:
+      POSTGRES_USER: transactiq
+      POSTGRES_PASSWORD: transactiq_dev
+      POSTGRES_DB: transactiq
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U transactiq"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - transactiq
+
+  # Redis Cache (optional)
+  redis:
+    image: redis:7-alpine
+    container_name: transactiq-cache
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - transactiq
+
+  # FastAPI Backend
+  backend:
+    build:
+      context: .
+      dockerfile: infrastructure/Dockerfile.backend
+    container_name: transactiq-backend
+    environment:
+      DATABASE_URL: postgresql://transactiq:transactiq_dev@postgres:5432/transactiq
+      REDIS_URL: redis://redis:6379/0
+      ENVIRONMENT: production
+      LOG_SQL: "false"
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - transactiq_chunks:/tmp/transactiq_chunks
+    networks:
+      - transactiq
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+  # Next.js Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: infrastructure/Dockerfile.frontend
+    container_name: transactiq-frontend
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8000/api/v1
+      NEXT_PUBLIC_ENVIRONMENT: production
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - transactiq
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+  # Nginx Reverse Proxy (optional)
+  nginx:
+    image: nginx:alpine
+    container_name: transactiq-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./infrastructure/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./infrastructure/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - transactiq
+
+volumes:
+  postgres_data:
+    driver: local
+  transactiq_chunks:
+    driver: local
+
+networks:
+  transactiq:
+    driver: bridge

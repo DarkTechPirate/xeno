@@ -1,0 +1,16 @@
+order_id,order_date,customer_name,email,phone,country,product_name,quantity,unit_price,total_amount,payment_mode,transaction_ref
+ORD001,2025-01-15,Raj Kumar,raj@example.com,9876543210,IN,Laptop,1,1000.00,1000.00,credit_card,TXN001
+ORD002,2025-01-14,Priya Singh,priya@example.com,9876543211,IN,Mouse,2,50.00,100.00,debit_card,TXN002
+ORD003,2025-01-13,Arjun Patel,arjun@example.com,9876543212,IN,Keyboard,3,75.00,225.00,net_banking,TXN003
+ORD004,2025-01-12,Singapore Customer,sg@example.com,98765432,SG,Monitor,1,300.00,300.00,credit_card,TXN004
+ORD005,2025-01-11,Singapore User,sguser@example.com,98765433,SG,USB Cable,5,10.00,50.00,upi,TXN005
+ORD006,2025-01-10,John USA,johnusa@example.com,2125551234,US,HDMI Cable,2,15.00,30.00,credit_card,TXN006
+ORD007,2025-01-09,Jane USA,janeusa@example.com,2125551235,US,Webcam,1,120.00,120.00,debit_card,TXN007
+ORD008,2025-01-08,Alice UK,aliceuk@example.com,02012345678,UK,Speaker,1,80.00,80.00,net_banking,TXN008
+ORD009,2025-01-07,Bob UK,bobuk@example.com,02012345679,UK,Headphones,1,150.00,150.00,credit_card,TXN009
+ORD010,2025-01-06,Ramesh India,ramesh@example.com,9876543213,IN,Desk Lamp,2,45.00,90.00,upi,TXN010
+ORD011,2025-01-05,Singapore Local,local@example.com,98765434,SG,Keyboard Tray,1,35.00,35.00,credit_card,TXN011
+ORD012,2025-01-04,USA Customer,usa@example.com,2125551236,US,Monitor Stand,3,25.00,75.00,debit_card,TXN012
+ORD013,2025-01-03,UK User,ukuser@example.com,02012345680,UK,Desk Organizer,1,30.00,30.00,net_banking,TXN013
+ORD014,2025-01-02,India User,indiauser@example.com,9876543214,IN,Laptop Stand,2,40.00,80.00,credit_card,TXN014
+ORD015,2025-01-01,Singapore Business,business@example.com,98765435,SG,USB Hub,1,55.00,55.00,upi,TXN015
